@@ -1,21 +1,23 @@
 // Libraries
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // Components
 import Registration from "./Registration.js";
+import AboutYou from "./AboutYou.js";
 
 class RegistrationController extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       step: 1,
       furthestStep: 1
-    }
+    };
   }
 
   nextStep = () => {
     this.setState((state) => ({
-      step: state.step + 1
+      step: state.step + 1,
+      furthestStep: Math.max(state.step + 1, state.furthestStep)
     }));
   }
 
@@ -30,8 +32,8 @@ class RegistrationController extends Component {
       <div className="module">
         {
           {
-            1: <Registration nextStep={this.nextStep}/>,
-            2: <Registration nextStep={this.nextStep}/>
+            2: <Registration nextStep={this.nextStep}/>,
+            1: <AboutYou nextStep={this.nextStep} prevStep={this.prevStep}/>
           }[this.state.step]
         }
         {/*

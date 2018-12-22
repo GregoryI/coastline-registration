@@ -5,13 +5,16 @@ import React, { Component } from "react";
 // import TextInput from "../uikit/TextInput";
 
 
-class Registration extends Component {
+class AboutYou extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      confirm: "",
+      name: "",
+      restaurant: "",
+      phone: "",
+      address: "",
+      role: "",
+      type: "",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -26,21 +29,23 @@ class Registration extends Component {
       <div>
 
         <div className="title">
-          Registration
+          About You
         </div>
 
-        <div className="input-container">
-          <div className="input-label">
-            EMAIL
+        <div className="input-row">
+          <div className="input-container">
+            <div className="input-label">
+              YOUR NAME
+            </div>
+            <input type="text" />
           </div>
-          <input type="email" />
-        </div>
 
-        <div className="input-container">
-          <div className="input-label">
-            PASSWORD
+          <div className="input-container">
+            <div className="input-label">
+              YOUR ROLE
+            </div>
+            <input type="text" />
           </div>
-          <input type="password" />
         </div>
 
         <div className="input-container">
@@ -51,8 +56,8 @@ class Registration extends Component {
         </div>
 
         <div className="footer">
-          <div className="next-button" onClick={this.props.nextStep}>
-            1 of 5
+          <div className="next-button" onClick={this.props.prevStep}>
+            2 of 5
           </div>
         </div>
 
@@ -61,4 +66,4 @@ class Registration extends Component {
   }
 }
 
-export default Registration;
+export default AboutYou;
