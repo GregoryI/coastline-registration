@@ -1,0 +1,53 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "ecmascript": 6,
+    "jsx": true
+  },
+  "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true
+  },
+  // "esnext": true,
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "strict": 0,
+    "quotes": [
+      2,
+      "double"
+    ],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "semi": [
+      2,
+      "always"
+    ],
+    "no-undef": 0,
+    "no-unused-vars": 0,
+    "camelcase": 0,
+    "no-underscore-dangle": 0,
+    "no-trailing-spaces": "error",
+    "max-len": [
+      1,
+      500,
+      4,
+      {
+        "ignoreComments": true,
+        "ignoreUrls": true,
+        "ignorePattern": "^import"
+      }
+    ]
+  }
+}
