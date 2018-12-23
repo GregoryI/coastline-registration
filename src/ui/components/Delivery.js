@@ -21,11 +21,15 @@ class Delivery extends Component {
       from: "",
       to: "",
       instructions: "",
+      instructionsHeight: 23
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.onHeightChange = this.onHeightChange.bind(this);
   }
+
+  INSTRUCTIONS_MARGIN = 207;
 
   handleInputChange = name => evt => {
     this.setState({ [name]: evt.target.value });
@@ -33,6 +37,10 @@ class Delivery extends Component {
 
   handleSelectChange = name => option => {
     this.setState({ [name]: option });
+  }
+
+  onHeightChange = height => {
+    this.setState({ instructionsHeight: height });
   }
 
   render() {
@@ -68,9 +76,15 @@ class Delivery extends Component {
             <TextArea
               id="special-instructions"
               onChange={this.handleInputChange("instructions")}
+              onHeightChange={this.onHeightChange}
               value={this.state.instructions} />
           </FormContainer>
         </FormRow>
+
+        <div
+          style={
+            {"height": `${this.INSTRUCTIONS_MARGIN - this.state.instructionsHeight}px`}
+          } />
 
         <div className="footer">
           <div className="button prev-button" onClick={this.props.prevStep}>

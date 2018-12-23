@@ -1,5 +1,6 @@
 // Libraries
 import React, { Component } from "react";
+import Textarea from "react-textarea-autosize";
 
 
 class TextArea extends Component {
@@ -12,7 +13,8 @@ class TextArea extends Component {
 
   render() {
     return (
-      <textarea
+      <Textarea
+        maxRows={9}
         className="input"
         {...this.props} />
     );
