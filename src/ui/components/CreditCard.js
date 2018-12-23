@@ -1,20 +1,24 @@
 // Libraries
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // UIkit
 import { FormSectionHeader, FormRow, FormContainer } from "../uikit/form/index.js";
 import Text from "../uikit/input/Text.js";
 import NumberInput from "../uikit/input/Number.js";
 
+// Actions
+import { saveBilling } from "../../actions/billing.js";
+
 
 class CreditCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardNumber: "",
-      nameOnCard: "",
-      expiry: "",
-      cvc: "",
+      cardNumber: this.props.cardNumber,
+      nameOnCard: this.props.nameOnCard,
+      expiry: this.props.expiry,
+      cvc: this.props.cvc,
     };
   }
 
@@ -22,7 +26,14 @@ class CreditCard extends Component {
     this.setState({ [name]: evt.target.value });
   }
 
+  componentWillUnmount() {
+    const { cardNumber, nameOnCard, expiry, cvc } = this.state;
+    console.log("SAVING", expiry);
+    this.props.saveBilling({ cardNumber, nameOnCard, expiry, cvc });
+  }
+
   render() {
+    console.log(this.state.expiry);
     return (
       <div>
 
@@ -50,12 +61,14 @@ class CreditCard extends Component {
 
         <FormRow>
           <FormContainer label="expiry (mm-yyyy)">
-            <NumberInput
+            <Text
               id="expiry-(mm-yyyy)"
               onChange={this.handleInputChange("expiry")}
               value={this.state.expiry}
               required={true}
-              maxLength={9}/>
+              maxLength={9}
+              type="text"
+              pattern="[0-9\-]+"/>
           </FormContainer>
 
           <FormContainer label="cvv/cvc">
@@ -73,4 +86,16 @@ class CreditCard extends Component {
   }
 }
 
-export default CreditCard;
+const mapStateToProps = (state, ownProps) => {
+  const { cardNumber, nameOnCard, expiry, cvc } = state.billing;
+  console.log(expiry);
+  return { cardNumber, nameOnCard, expiry, cvc };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveBilling: (billing) => dispatch(saveBilling(billing))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreditCard);

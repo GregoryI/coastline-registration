@@ -1,6 +1,7 @@
 // Libraries
 import React, { Component } from "react";
 import Select from "react-select";
+import { connect } from "react-redux";
 
 // Components
 import EFT from "./EFT.js";
@@ -9,6 +10,9 @@ import CreditCard from "./CreditCard.js";
 // UIkit
 import { FormTitle, FormRow, FormContainer } from "../uikit/form/index.js";
 import Text from "../uikit/input/Text.js";
+
+// Actions
+import { saveBilling } from "../../actions/billing.js";
 
 // Util
 import { TERMS_TEXT } from "../../util/strings.js";
@@ -23,9 +27,9 @@ class Accounting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      payment: PAYMENT_METHODS[0],
-      terms: "",
-      accountingEmail: "",
+      payment: this.props.payment,
+      terms: this.props.terms,
+      accountingEmail: this.props.accountingEmail,
     };
   }
 
@@ -35,6 +39,25 @@ class Accounting extends Component {
 
   handleSelectChange = name => option => {
     this.setState({ [name]: option });
+  }
+
+  saveBilling = () => {
+    const { payment, terms, accountingEmail } = this.state;
+    this.props.saveBilling({
+      payment: payment && payment.value,
+      terms: terms && terms.value,
+      accountingEmail
+    });
+  }
+
+  nextStep = () => {
+    this.saveBilling();
+    this.props.nextStep();
+  }
+
+  prevStep = () => {
+    this.saveBilling();
+    this.props.prevStep();
   }
 
   renderPaymentInformation = () => {
@@ -91,10 +114,10 @@ class Accounting extends Component {
         <p className="disclaimer">{TERMS_TEXT}</p>
 
         <div className="footer">
-          <div className="button prev-button" onClick={this.props.prevStep}>
+          <div className="button prev-button" onClick={this.prevStep}>
             PREVIOUS
           </div>
-          <div className="button next-button" onClick={this.props.nextStep}>
+          <div className="button next-button" onClick={this.nextStep}>
             4 of 5
           </div>
         </div>
@@ -104,4 +127,20 @@ class Accounting extends Component {
   }
 }
 
-export default Accounting;
+const mapStateToProps = (state, ownProps) => {
+  const payment = state.billing.payment;
+  const terms = state.billing.terms;
+  return {
+    payment: payment && PAYMENT_METHODS.find(o => o.value === payment),
+    terms: terms && ACCOUNTING_TERMS.find(o => o.value === terms),
+    accountingEmail: state.billing.accountingEmail,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveBilling: (billing) => dispatch(saveBilling(billing))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Accounting);

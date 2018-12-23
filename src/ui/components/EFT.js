@@ -1,11 +1,15 @@
 // Libraries
 import React, { Component } from "react";
 import Select from "react-select";
+import { connect } from "react-redux";
 
 // UIkit
 import { FormSectionHeader, FormRow, FormContainer } from "../uikit/form/index.js";
 import Text from "../uikit/input/Text.js";
 import NumberInput from "../uikit/input/Number.js";
+
+// Actions
+import { saveBilling } from "../../actions/billing.js";
 
 // Util
 import { SELECT_STYLE } from "../../util/styles.js";
@@ -16,10 +20,10 @@ class EFT extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      institution: "",
-      branchAddress: "",
-      accountNumber: "",
-      transitNumber: "",
+      institution: this.props.institution,
+      branchAddress: this.props.branchAddress,
+      accountNumber: this.props.accountNumber,
+      transitNumber: this.props.transitNumber,
     };
   }
 
@@ -29,6 +33,16 @@ class EFT extends Component {
 
   handleSelectChange = name => option => {
     this.setState({ [name]: option });
+  }
+
+  componentWillUnmount() {
+    const { institution, branchAddress, accountNumber, transitNumber } = this.state;
+    this.props.saveBilling({
+      institution: institution && institution.value,
+      branchAddress,
+      accountNumber,
+      transitNumber
+    });
   }
 
   render() {
@@ -82,4 +96,20 @@ class EFT extends Component {
   }
 }
 
-export default EFT;
+const mapStateToProps = (state, ownProps) => {
+  const institution = state.billing.institution;
+  return {
+    institution: institution && INSTITUTIONS.find(o => o.value === institution),
+    branchAddress: state.billing.branchAddress,
+    accountNumber: state.billing.accountNumber,
+    transitNumber: state.billing.transitNumber,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveBilling: (billing) => dispatch(saveBilling(billing))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EFT);
