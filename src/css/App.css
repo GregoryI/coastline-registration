@@ -9,12 +9,6 @@ input, textarea, select {
   border-bottom: solid 2px #d8d8d8;
   font-size: 18px;
 }
-/*
-input {
-  border: none;
-  border-bottom: solid 1px #395572;
-  border-radius: 0px;
-}*/
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
