@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "react-select": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
