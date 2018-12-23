@@ -1,10 +1,14 @@
 // Libraries
 import React, { Component } from "react";
 import Select from "react-select";
+import { connect } from "react-redux";
 
 // UIkit
 import { FormTitle, FormRow, FormContainer } from "../uikit/form/index.js";
 import Text from "../uikit/input/Text.js";
+
+// Actions
+import { saveCompany } from "../../actions/company.js";
 
 // Util
 import { SELECT_STYLE } from "../../util/styles.js";
@@ -18,16 +22,13 @@ class AboutYou extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      restaurant: "",
-      phone: "",
-      address: "",
-      role: "",
-      type: "",
+      name: this.props.name,
+      restaurant: this.props.restaurant,
+      phone: this.props.phone,
+      address: this.props.address,
+      role: this.props.role,
+      type: this.props.type,
     };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   handleInputChange = name => evt => {
@@ -36,6 +37,27 @@ class AboutYou extends Component {
 
   handleSelectChange = name => option => {
     this.setState({ [name]: option });
+  }
+
+  saveCompany = () => {
+    const { name, restaurant, phone, address, role, type } = this.state;
+    this.props.saveCompany(
+      name,
+      restaurant,
+      phone,
+      address,
+      !!role && role.value,
+      !!type && type.value);
+  }
+
+  nextStep = () => {
+    this.saveCompany();
+    this.props.nextStep();
+  }
+
+  prevStep = () => {
+    this.saveCompany();
+    this.props.prevStep();
   }
 
   render() {
@@ -105,10 +127,10 @@ class AboutYou extends Component {
         </FormRow>
 
         <div className="footer">
-          <div className="button prev-button" onClick={this.props.prevStep}>
+          <div className="button prev-button" onClick={this.prevStep}>
             PREVIOUS
           </div>
-          <div className="button next-button" onClick={this.props.nextStep}>
+          <div className="button next-button" onClick={this.nextStep}>
             2 of 5
           </div>
         </div>
@@ -118,4 +140,23 @@ class AboutYou extends Component {
   }
 }
 
-export default AboutYou;
+const mapStateToProps = (state, ownProps) => {
+  const role = state.company.role;
+  const type = state.company.type;
+  return {
+    name: state.company.name,
+    restaurant: state.company.restaurant,
+    phone: state.company.phone,
+    address: state.company.address,
+    role: role && ROLE_OPTIONS.find(o => o.value === role),
+    type: type && TYPE_OPTIONS.find(o => o.value === type)
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveCompany: (...args) => dispatch(saveCompany(...args))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AboutYou);

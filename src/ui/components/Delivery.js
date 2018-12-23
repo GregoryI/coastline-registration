@@ -1,10 +1,14 @@
 // Libraries
 import React, { Component } from "react";
 import Select from "react-select";
+import { connect } from "react-redux";
 
 // UIkit
 import { FormTitle, FormRow, FormContainer } from "../uikit/form/index.js";
 import TextArea from "../uikit/input/TextArea.js";
+
+// Actions
+import { saveDelivery } from "../../actions/delivery.js";
 
 // Util
 import { SELECT_STYLE } from "../../util/styles.js";
@@ -18,15 +22,11 @@ class Delivery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      from: "",
-      to: "",
-      instructions: "",
+      from: this.props.from,
+      to: this.props.to,
+      instructions: this.props.instructions,
       instructionsHeight: 23
     };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.onHeightChange = this.onHeightChange.bind(this);
   }
 
   INSTRUCTIONS_MARGIN = 207;
@@ -41,6 +41,24 @@ class Delivery extends Component {
 
   onHeightChange = height => {
     this.setState({ instructionsHeight: height });
+  }
+
+  saveDelivery = () => {
+    const { from, to, instructions } = this.state;
+    this.props.saveDelivery(
+      from && from.value,
+      to && to.value,
+      instructions);
+  }
+
+  nextStep = () => {
+    this.saveDelivery();
+    this.props.nextStep();
+  }
+
+  prevStep = () => {
+    this.saveDelivery();
+    this.props.prevStep();
   }
 
   render() {
@@ -87,10 +105,10 @@ class Delivery extends Component {
           } />
 
         <div className="footer">
-          <div className="button prev-button" onClick={this.props.prevStep}>
+          <div className="button prev-button" onClick={this.prevStep}>
             PREVIOUS
           </div>
-          <div className="button next-button" onClick={this.props.nextStep}>
+          <div className="button next-button" onClick={this.nextStep}>
             3 of 5
           </div>
         </div>
@@ -100,4 +118,20 @@ class Delivery extends Component {
   }
 }
 
-export default Delivery;
+const mapStateToProps = (state, ownProps) => {
+  const from = state.delivery.from;
+  const to = state.delivery.to;
+  return {
+    from: from && DELIVERIES_FROM.find(o => o.value === from),
+    to: to && DELIVERIES_TO.find(o => o.value === to),
+    instructions: state.delivery.instructions,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveDelivery: (...args) => dispatch(saveDelivery(...args))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Delivery);
