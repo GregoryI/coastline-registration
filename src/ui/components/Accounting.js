@@ -9,7 +9,7 @@ import CreditCard from "./CreditCard.js";
 
 // UIkit
 import { FormTitle, FormRow, FormContainer } from "../uikit/form/index.js";
-import Text from "../uikit/input/Text.js";
+import Email from "../uikit/input/Email.js";
 
 // Actions
 import { saveBilling } from "../../actions/billing.js";
@@ -101,7 +101,7 @@ class Accounting extends Component {
 
         <FormRow>
           <FormContainer label="accounting email">
-            <Text
+            <Email
               id="accounting-email"
               onChange={this.handleInputChange("accountingEmail")}
               value={this.state.accountingEmail}

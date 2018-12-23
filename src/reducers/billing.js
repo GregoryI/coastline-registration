@@ -17,7 +17,7 @@ const initialState = {
 };
 
 // NOTE: USER_LOGOUT handled by root reducer
-const user = (state=initialState, action) => {
+const billing = (state=initialState, action) => {
   switch (action.type) {
     case SAVE_BILLING:
       return Object.assign(state, action.billing);
@@ -26,4 +26,4 @@ const user = (state=initialState, action) => {
   }
 };
 
-export default user;
+export default billing;

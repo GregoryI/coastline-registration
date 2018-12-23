@@ -4,7 +4,7 @@ import user from "./user.js";
 import company from "./company.js";
 import delivery from "./delivery.js";
 import billing from "./billing.js";
-// import invite from "./invite.js";
+import invite from "./invite.js";
 
 
 /*
@@ -20,7 +20,7 @@ const appReducer = combineReducers({
   company,
   delivery,
   billing,
-  // invite
+  invite
 });
 
 const rootReducer = (state, action) => {

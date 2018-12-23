@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { FormSectionHeader, FormRow, FormContainer } from "../uikit/form/index.js";
 import Text from "../uikit/input/Text.js";
 import NumberInput from "../uikit/input/Number.js";
+import MaskedInput from "../uikit/input/MaskedInput.js";
 
 // Actions
 import { saveBilling } from "../../actions/billing.js";
@@ -28,12 +29,10 @@ class CreditCard extends Component {
 
   componentWillUnmount() {
     const { cardNumber, nameOnCard, expiry, cvc } = this.state;
-    console.log("SAVING", expiry);
     this.props.saveBilling({ cardNumber, nameOnCard, expiry, cvc });
   }
 
   render() {
-    console.log(this.state.expiry);
     return (
       <div>
 
@@ -41,8 +40,10 @@ class CreditCard extends Component {
 
         <FormRow>
           <FormContainer label="credit card number">
-            <NumberInput
+            <MaskedInput
               id="credit-card-number"
+              mask={[/\d/, /\d/, /\d/, /\d/, " ", /\d/, /\d/, /\d/, /\d/, " ", /\d/, /\d/, /\d/, /\d/, " ", /\d/, /\d/, /\d/, /\d/]}
+              placeholder="4242 4242 4242 4242"
               onChange={this.handleInputChange("cardNumber")}
               value={this.state.cardNumber}
               required={true} />
@@ -61,14 +62,12 @@ class CreditCard extends Component {
 
         <FormRow>
           <FormContainer label="expiry (mm-yyyy)">
-            <Text
+            <MaskedInput
               id="expiry-(mm-yyyy)"
+              mask={[/\d/, /\d/, "-", /\d/, /\d/, /\d/, /\d/]}
               onChange={this.handleInputChange("expiry")}
               value={this.state.expiry}
-              required={true}
-              maxLength={9}
-              type="text"
-              pattern="[0-9\-]+"/>
+              required={true}/>
           </FormContainer>
 
           <FormContainer label="cvv/cvc">
@@ -88,7 +87,6 @@ class CreditCard extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { cardNumber, nameOnCard, expiry, cvc } = state.billing;
-  console.log(expiry);
   return { cardNumber, nameOnCard, expiry, cvc };
 };
 

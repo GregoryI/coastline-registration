@@ -7,7 +7,7 @@ const initialState = {
 };
 
 // NOTE: USER_LOGOUT handled by root reducer
-const user = (state=initialState, action) => {
+const delivery = (state=initialState, action) => {
   switch (action.type) {
     case SAVE_DELIVERY:
       return action.delivery;
@@ -16,4 +16,4 @@ const user = (state=initialState, action) => {
   }
 };
 
-export default user;
+export default delivery;

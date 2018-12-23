@@ -1,5 +1,6 @@
 // Libraries
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // UIkit
 import {
@@ -11,12 +12,15 @@ import {
 import Email from "../uikit/input/Email.js";
 import GraphicButton from "../uikit/image/GraphicButton.js";
 
+// Actions
+import { saveEmails } from "../../actions/invite.js";
+
 
 class Invite extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emails: ["", ""],
+      emails: this.props.emails,
     };
   }
 
@@ -30,6 +34,20 @@ class Invite extends Component {
     this.setState((state) => (
       { emails: [...state.emails, ""] }
     ));
+  }
+
+  saveEmails = () => {
+    this.props.saveEmails(this.state.emails);
+  }
+
+  nextStep = () => {
+    this.saveEmails();
+    this.props.nextStep();
+  }
+
+  prevStep = () => {
+    this.saveEmails();
+    this.props.prevStep();
   }
 
   render() {
@@ -59,11 +77,11 @@ class Invite extends Component {
         </div>
 
         <div className="footer">
-          <div className="button prev-button" onClick={this.props.prevStep}>
+          <div className="button prev-button" onClick={this.prevStep}>
             PREVIOUS
           </div>
 
-          <div className="button next-button" onClick={this.props.nextStep}>
+          <div className="button next-button" onClick={this.nextStep}>
             SUBMIT
           </div>
         </div>
@@ -73,4 +91,14 @@ class Invite extends Component {
   }
 }
 
-export default Invite;
+const mapStateToProps = (state, ownProps) => {
+  return { emails: state.invite.emails };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    saveEmails: (emails) => dispatch(saveEmails(emails))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Invite);
