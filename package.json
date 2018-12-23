@@ -14,9 +14,11 @@
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-select": "^2.1.2",
+    "react-text-mask": "^5.4.3",
     "react-textarea-autosize": "^7.1.0",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "text-mask-addons": "^3.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
