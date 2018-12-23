@@ -1,9 +1,9 @@
-.title {
+.form-title {
   /*color: #4f6c8d;*/
   color: #3366ff;
   font-weight: bold;
   /*font-size: calc(32px + 2vmin);*/
-  font-size: 46px;
+  font-size: 42px;
   text-align: center;
   margin-bottom: 50px;
 }
@@ -17,14 +17,17 @@
 .input-container {
   display: flex;
   flex-grow: 1;
-  flex-basis: 0;
   flex-direction: column;
-  margin: 20px 0px;
+  margin: 12px 0px;
 }
 
 @media only screen and (min-width: 600px) {
   .form-row {
     flex-direction: row;
+  }
+
+  .input-container {
+    flex-basis: 0;
   }
 
   .input-container:not(:first-child):not(:only-child) {
@@ -36,14 +39,32 @@
   }
 }
 
-.input-label {
-  color: #668dff;
+.form-header {
+  color: #4a4a4a;
   font-size: 24px;
   font-weight: 600;
-  text-transform: uppercase;
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.input-lavel:focus {
+.form-section-header {
+  color: #4a4a4a;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.input-label {
+  color: #668dff;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.input-label:focus {
   color: #3366ff;
 }
 
@@ -52,23 +73,20 @@
   height: 26px;
 }
 
-.select-input {
-  width: 100%;
-  background-color: green;
-}
 
 .footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
+  margin-top: 20px;
 }
 
 .button {
   padding: 10px;
   border-radius: 30px;
   text-align: center;
-  width: 33%;
+  width: 30%;
   min-width: 50px;
   font-weight: 600;
 }
@@ -101,4 +119,29 @@
   /*background-color: #3366ff;*/
   border-color: #3366ff;
   color: #3366ff;
+}
+
+.send-email-button {
+  display: block;
+  width: inherit;
+  text-decoration: none;
+  margin-top: 60px;
+}
+
+.disclaimer {
+  color: black;
+  font-size: 10px;
+  margin-bottom: 30px;
+}
+
+.add-email-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  width: 75px;
+  cursor: pointer;
+  color: #668dff;
+  border: solid 1px #668dff;
+  border-radius: 20px;
+  padding: 5px;
 }
