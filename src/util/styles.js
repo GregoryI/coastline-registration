@@ -2,7 +2,7 @@ export const SELECT_STYLE = {
   container: (provided) => ({
     ...provided,
     height: 40,
-    fontSize: 20
+    fontSize: 18
   }),
   control: (provided, state) => ({
     ...provided,
@@ -16,8 +16,14 @@ export const SELECT_STYLE = {
       borderColor: "#777777"
     }
   }),
-  valueContainer: (provided, s) => ({
+  valueContainer: (provided) => ({
     ...provided,
     padding: 0
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected
+      ? "#3366ff"
+      : state.isFocused ? "#DEEBFF" : null
   })
 };
