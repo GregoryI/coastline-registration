@@ -4,7 +4,7 @@ import Select from "react-select";
 
 // UIkit
 import { FormTitle, FormRow, FormContainer } from "../uikit/form/index.js";
-import TextInput from "../uikit/inputs/TextInput.js";
+import Text from "../uikit/input/Text.js";
 
 // Util
 import { SELECT_STYLE } from "../../util/styles.js";
@@ -46,7 +46,7 @@ class AboutYou extends Component {
 
         <FormRow>
           <FormContainer label="your name">
-            <TextInput
+            <Text
               id="your_name"
               onChange={this.handleInputChange("name")}
               value={this.state.name}
@@ -66,7 +66,7 @@ class AboutYou extends Component {
 
         <FormRow>
           <FormContainer label="restaurant name">
-            <TextInput
+            <Text
               id="restaurant-name"
               onChange={this.handleInputChange("restaurant")}
               value={this.state.restaurant}
@@ -86,7 +86,7 @@ class AboutYou extends Component {
 
         <FormRow>
           <FormContainer label="phone number">
-            <TextInput
+            <Text
               id="phone-number"
               onChange={this.handleInputChange("phone")}
               value={this.state.phone}
@@ -96,7 +96,7 @@ class AboutYou extends Component {
 
         <FormRow>
           <FormContainer label="company address">
-            <TextInput
+            <Text
               id="company-address"
               onChange={this.handleInputChange("address")}
               value={this.state.address}

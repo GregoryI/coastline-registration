@@ -4,7 +4,7 @@ import Select from "react-select";
 
 // UIkit
 import { FormTitle, FormRow, FormContainer } from "../uikit/form/index.js";
-import TextArea from "../uikit/inputs/TextArea.js";
+import TextArea from "../uikit/input/TextArea.js";
 
 // Util
 import { SELECT_STYLE } from "../../util/styles.js";
@@ -90,7 +90,7 @@ class Delivery extends Component {
           <div className="button prev-button" onClick={this.props.prevStep}>
             PREVIOUS
           </div>
-          <div className="button next-button" onClick={this.props.prevStep}>
+          <div className="button next-button" onClick={this.props.nextStep}>
             3 of 5
           </div>
         </div>

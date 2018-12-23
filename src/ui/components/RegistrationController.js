@@ -5,12 +5,15 @@ import React, { Component } from "react";
 import Registration from "./Registration.js";
 import AboutYou from "./AboutYou.js";
 import Delivery from "./Delivery.js";
+import Accounting from "./Accounting.js";
+import Invite from "./Invite.js";
+import Finished from "./Finished.js";
 
 class RegistrationController extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 3,
+      step: 1,
       furthestStep: 1
     };
   }
@@ -35,25 +38,12 @@ class RegistrationController extends Component {
           {
             1: <Registration nextStep={this.nextStep}/>,
             2: <AboutYou nextStep={this.nextStep} prevStep={this.prevStep}/>,
-            3: <Delivery nextStep={this.nextStep} prevStep={this.prevStep}/>
+            3: <Delivery nextStep={this.nextStep} prevStep={this.prevStep}/>,
+            4: <Accounting nextStep={this.nextStep} prevStep={this.prevStep}/>,
+            5: <Invite nextStep={this.nextStep} prevStep={this.prevStep}/>,
+            6: <Finished prevStep={this.prevStep}/>
           }[this.state.step]
         }
-        {/*
-          switch (this.state.step) {
-            case 1:
-              return <Registration nextStep={this.nextStep}/>
-            case 2:
-              return <AboutYou />
-            case 3:
-              return <Delivery />
-            case 4:
-              return <Accounting />
-            case 5:
-              return <Referral />
-            case 6:
-              return <Success />
-          }
-        */}
       </div>
     );
   }

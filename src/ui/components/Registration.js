@@ -3,8 +3,8 @@ import React, { Component } from "react";
 
 // UIkit
 import { FormTitle, FormRow, FormContainer } from "../uikit/form/index.js";
-import Email from "../uikit/inputs/Email.js";
-import Password from "../uikit/inputs/Password.js";
+import Email from "../uikit/input/Email.js";
+import Password from "../uikit/input/Password.js";
 
 
 class Registration extends Component {
