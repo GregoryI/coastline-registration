@@ -108,7 +108,7 @@ class AboutYou extends Component {
           <div className="button prev-button" onClick={this.props.prevStep}>
             PREVIOUS
           </div>
-          <div className="button next-button" onClick={this.props.prevStep}>
+          <div className="button next-button" onClick={this.props.nextStep}>
             2 of 5
           </div>
         </div>

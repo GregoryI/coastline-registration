@@ -19,15 +19,5 @@ export const SELECT_STYLE = {
   valueContainer: (provided, s) => ({
     ...provided,
     padding: 0
-  }),
-  input: (p, s) => {
-    // console.log(p);
-    // console.log(s);
-    // console.log(s.isSelected);
-    // console.log(s.isFocused);
-    // console.log(s.isActive);
-    return {
-      ...p
-    };
-  }
+  })
 };

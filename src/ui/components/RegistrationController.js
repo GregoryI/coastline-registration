@@ -4,12 +4,13 @@ import React, { Component } from "react";
 // Components
 import Registration from "./Registration.js";
 import AboutYou from "./AboutYou.js";
+import Delivery from "./Delivery.js";
 
 class RegistrationController extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 2,
+      step: 1,
       furthestStep: 1
     };
   }
@@ -33,7 +34,8 @@ class RegistrationController extends Component {
         {
           {
             1: <Registration nextStep={this.nextStep}/>,
-            2: <AboutYou nextStep={this.nextStep} prevStep={this.prevStep}/>
+            2: <AboutYou nextStep={this.nextStep} prevStep={this.prevStep}/>,
+            3: <Delivery nextStep={this.nextStep} prevStep={this.prevStep}/>
           }[this.state.step]
         }
         {/*
