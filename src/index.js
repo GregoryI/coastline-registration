@@ -9,6 +9,7 @@ import * as serviceWorker from "./serviceWorker";
 // CSS
 import "./index.css";
 import "./css/App.css";
+import "./css/Uikit.css";
 import "./css/Registration.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));

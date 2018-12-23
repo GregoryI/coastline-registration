@@ -1,0 +1,22 @@
+.password {
+  position: relative;
+}
+
+.password-show {
+  cursor: pointer;
+  position: absolute;
+  text-transform: uppercase;
+  background-color: #668dff;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 15px;
+  min-width: 50px;
+  text-align: center;
+  right: 0;
+}
+
+.password-show:hover {
+  background-color: #3366ff;
+}
