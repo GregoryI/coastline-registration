@@ -13,7 +13,7 @@ import Email from "../uikit/input/Email.js";
 import GraphicButton from "../uikit/image/GraphicButton.js";
 
 // Actions
-import { saveEmails } from "../../actions/invite.js";
+import { saveEmails, submitRegistration } from "../../actions/invite.js";
 
 
 class Invite extends Component {
@@ -42,7 +42,12 @@ class Invite extends Component {
 
   nextStep = () => {
     this.saveEmails();
-    this.props.nextStep();
+    this.props.submitRegistration()
+      .then((success) => {
+        if (success) {
+          this.props.nextStep();
+        }
+      });
   }
 
   prevStep = () => {
@@ -97,7 +102,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    saveEmails: (emails) => dispatch(saveEmails(emails))
+    saveEmails: (emails) => dispatch(saveEmails(emails)),
+    submitRegistration: () => dispatch(submitRegistration())
   };
 };
 

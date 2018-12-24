@@ -26,9 +26,9 @@ if (!isDev && cluster.isMaster) {
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
   // Answer API requests.
-  app.get('/api', function (req, res) {
+  app.post('/registration', function (req, res) {
     res.set('Content-Type', 'application/json');
-    res.send('{"message":"Hello from the custom server!"}');
+    res.send('{"success": true}');
   });
 
   // All remaining requests return the React app, so it can handle routing.
